@@ -1,0 +1,24 @@
+version: '3' 
+
+services:
+  bk_container: 
+    container_name: bk_container
+    build: ./security-project
+    ports:
+      - 1489:1489
+    networks:
+      - security_project_networks
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  bd_container:
+    container_name: bd_container
+    build: ./qw
+    ports:
+      - 1490:5432
+    networks:
+      - security_project_networks
+
+networks:
+  security_project_networks:
+   
