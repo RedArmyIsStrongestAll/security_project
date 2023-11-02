@@ -16,4 +16,6 @@ Pom описнаие:
 <version>0.0.1-SNAPSHOT</version>
 
 
-Запуск: в корневой директории с docker-compose.yml (должен быть установлен docker и docker-compose в дистрибутив unix системы) 1) запустить docker-compose build, 2) после сборки docker-compose up
+Запуск: 
+Существует две ветки: master - чисто исходный проект, for_jar - с уже собраным jar файлом, то есть докер пропускает действие по сборке проекта
+В корневой директории с docker-compose.yml (должен быть установлен docker и docker-compose в дистрибутив unix системы) 1) запустить docker-compose build, 2) после сборки docker-compose up
