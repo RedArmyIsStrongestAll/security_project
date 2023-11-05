@@ -16,6 +16,8 @@ import ru.ygtu.student.security.project.repositories.MainRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Repository
 @Slf4j
@@ -80,7 +82,7 @@ public class MainRepositoryImp implements MainRepository {
             String query = "select id, name, description, price, code_product, deleted_at \n" +
                     "from products " +
                     "where deleted_at is null " +
-                    "and name = " + "'" + name + "';";
+                    "and name ilike " + "'%" + name + "%';";
 
             return jdbcTemplateChain.get(getRoleId()).query(query, (rs, i) -> ProductDto.builder()
                     .id(rs.getInt("id"))
@@ -127,7 +129,16 @@ public class MainRepositoryImp implements MainRepository {
             List<Map<String, Object>> response = jdbcTemplateChain.get(roleId).queryForList(query);
             return new ResponseFromQueryDto(response);
         } catch (DataAccessException e) {
-            return new ResponseFromQueryDto(e.getMessage());
+            String errorMessage = e.getMessage();
+            String regex = ":(.*?)$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(errorMessage);
+            if (matcher.find()) {
+                String specificErrorMessage = matcher.group(1).trim();
+                return new ResponseFromQueryDto(specificErrorMessage);
+            } else {
+                return new ResponseFromQueryDto(e.getMessage());
+            }
         }
     }
 }
