@@ -130,8 +130,8 @@ public class MainRepositoryImp implements MainRepository {
             return new ResponseFromQueryDto(response);
         } catch (DataAccessException e) {
             String errorMessage = e.getMessage();
-            String regex = ":(.*?)$";
-            Pattern pattern = Pattern.compile(regex);
+            String regex = "ERROR: (.*?)(;|$)";
+            Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
             Matcher matcher = pattern.matcher(errorMessage);
             if (matcher.find()) {
                 String specificErrorMessage = matcher.group(1).trim();

@@ -10,11 +10,10 @@ import ru.ygtu.student.security.project.entity.Role;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .cors().disable()
+        http.csrf().disable()
                 .authorizeRequests()
                 //swagger
                 .antMatchers("/swag").permitAll()

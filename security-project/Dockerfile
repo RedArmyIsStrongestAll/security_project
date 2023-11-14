@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk-slim AS build
 COPY . /src
 WORKDIR /src
-RUN chmod 777 -R /src && ./mvnw clean package -P profile-prod
+RUN chmod 777 -R /src && sed -i 's/\r$//' mvnw && ./mvnw clean package -P profile-prod
 
 FROM openjdk:11-jre-slim
 RUN apt-get update && apt-get install -y docker.io
