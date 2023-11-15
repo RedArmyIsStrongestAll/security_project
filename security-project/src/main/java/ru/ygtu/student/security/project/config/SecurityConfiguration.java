@@ -2,6 +2,7 @@ package ru.ygtu.student.security.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
@@ -13,7 +14,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf().disable().cors(Customizer.withDefaults())
                 .authorizeRequests()
                 //swagger
                 .antMatchers("/swag").permitAll()
