@@ -2,6 +2,7 @@ version: '3'
 
 services:
   bk_container: 
+    image: bk_container_image
     container_name: bk_container
     build: ./security-project
     ports:
@@ -12,12 +13,22 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   bd_container:
+    image: bd_container_image
     container_name: bd_container
     build: ./qw
     ports:
       - 1490:5432
     networks:
       - security_project_networks
+
+  # front_container: 
+  #   image: front_container_image
+  #   container_name: front_container
+  #   build: ./infosec
+  #   ports:
+  #     - 5173:5173
+  #   networks:
+  #     - security_project_networks
 
 networks:
   security_project_networks:
