@@ -32,10 +32,10 @@ public class MainRepositoryImp implements MainRepository {
     @Override
     public UserDto getUserByUsernameAndPassword(String username, String password) {
         try {
-            String query = "select id, name, last_name, password, login, role_id \n" +
-                    "from users \n" +
-                    "where login = " + "'" + username + "'" + "\n" +
-                    "and password_noencoder = " + "'" + password + "'" + "\n" +
+            String query = "select id, name, last_name, password, login, role_id " +
+                    "from users " +
+                    "where login = " + "'" + username + "'" + " " +
+                    "and password_noencoder = " + "'" + password + "'" + " " +
                     "and deleted_at is null;";
 
             List<UserDto> userDtoList = jdbcTemplateChain.get(Role.ADMIN).query(query, (rs, i) -> UserDto.builder()
