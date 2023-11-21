@@ -22,8 +22,9 @@ public class SecurityConfiguration {
                 .antMatchers("/swagger-ui/**", "/swagger-ui/**.css",
                         "/swagger-ui/**.js", "/swagger-ui/**.html").permitAll()
                 //open url
-                .antMatchers("/fail/log").permitAll()
                 .antMatchers("/query").permitAll()
+                .antMatchers("/xss").permitAll()
+                .antMatchers("/fail/log").permitAll()
                 .antMatchers("/fail/main/reboot").permitAll()
                 //close url
                 .antMatchers("/fail/admin/**").hasAuthority(String.valueOf(Role.ADMIN.getId()))
